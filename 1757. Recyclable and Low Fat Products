@@ -1,0 +1,23 @@
+Задача:
++------------+---------+ 
+| Имя столбца | Тип | 
++------------+---------+ 
+| product_id | int | 
+| low_fats | enum | 
+| recyclable | enum | 
++------------+---------+ 
+product_id — первичный ключ (столбец с уникальными значениями) для этой таблицы. 
+low_fats — это ENUM (категория) типа ('Y', 'N'), где 'Y' означает, что этот продукт с низким содержанием жира, а 'N' — нет. 
+recyclable — это ENUM (категория) типов ('Y', 'N'), где 'Y' означает, что этот продукт пригоден для вторичной переработки, а 'N' — нет.
+Напишите решение по поиску идентификаторов продуктов, которые одновременно являются низкокалорийными и подлежат переработке.
+
+Pandas:
+import pandas as pd
+
+def find_products(products: pd.DataFrame) -> pd.DataFrame:
+    res = products[(products['low_fats'] == 'Y') & (products['recyclable'] == 'Y')]
+    return res[['product_id']]
+
+MySQL:
+select product_id from products
+where low_fats = 'Y' and recyclable = 'Y';
