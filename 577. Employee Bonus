@@ -32,3 +32,11 @@ PostgreSQL и MySQL:
 select name, bonus
 from employee e left join bonus b on e.empId = b.empId
 where b.bonus < 1000 or b.bonus is null;
+
+Pandas:
+import pandas as pd
+
+def employee_bonus(employee: pd.DataFrame, bonus: pd.DataFrame) -> pd.DataFrame:
+    data_marge = pd.merge(employee, bonus, how = 'left', on='empId')
+    filter_data_marge = data_marge[(data_marge['bonus'] < 1000) | (data_marge['bonus'].isnull())]
+    return filter_data_marge[['name', 'bonus']]
