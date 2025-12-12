@@ -1,18 +1,18 @@
 SELECT 
-  contest_id, -- The ID of the contest
+  contest_id,
   ROUND(
     COUNT(DISTINCT user_id) * 100 / ( -- Calculate the percentage of users
       SELECT 
-        COUNT(user_id) -- Total number of unique users
+        COUNT(user_id)
       FROM 
         Users
     ), 
     2
-  ) AS percentage -- The percentage of users registered for each contest, rounded to 2 decimal places
+  ) AS percentage
 FROM 
-  Register -- The table containing registration information
+  Register
 GROUP BY 
-  contest_id -- Group the data by contest ID
+  contest_id
 ORDER BY 
-  percentage DESC, -- Order the results by percentage in descending order
+  percentage DESC,
   contest_id;
