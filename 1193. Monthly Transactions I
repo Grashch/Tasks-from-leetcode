@@ -35,3 +35,22 @@ Output:
 | 2019-01  | DE      | 1           | 1              | 2000               | 2000                  |
 +----------+---------+-------------+----------------+--------------------+-----------------------+
 
+Write your PostgreSQL query statement below
+with form_trans as (
+    select
+        to_char(trans_date, 'YYYY-MM') as month,
+        country,
+        amount,
+        state
+    from transactions
+)
+
+select
+    month,
+    country,
+    count(*) as trans_count,
+    sum(case when state = 'approved' then 1 else 0 end) as approved_count,
+    sum(amount) as trans_total_amount,
+    sum(case when state = 'approved' then amount else 0 end) as approved_total_amount
+from form_trans
+group by month, country
