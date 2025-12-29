@@ -8,12 +8,9 @@ Table: Delivery
 | order_date                  | date    |
 | customer_pref_delivery_date | date    |
 +-----------------------------+---------+
-delivery_id is the column of unique values of this table.
-The table holds information about food delivery to customers that make orders at some date and specify a preferred delivery date (on the same order date or after it).
- 
+delivery_id — это столбец уникальных значений этой таблицы.
+Таблица содержит информацию о доставке еды клиентам, которые делают заказы в определенную дату и указывают предпочтительную дату доставки (в тот же день заказа или позже).
+Если предпочтительная дата доставки клиента совпадает с датой заказа, то заказ называется немедленным; в противном случае — запланированным.
+Первый заказ клиента — это заказ с самой ранней датой заказа, которую сделал клиент. Гарантируется, что у клиента есть ровно один первый заказ.
+Напишите решение для нахождения процента немедленных заказов среди первых заказов всех клиентов, округленного до 2 знаков после запятой.
 
-If the customer's preferred delivery date is the same as the order date, then the order is called immediate; otherwise, it is called scheduled.
-
-The first order of a customer is the order with the earliest order date that the customer made. It is guaranteed that a customer has precisely one first order.
-
-Write a solution to find the percentage of immediate orders in the first orders of all customers, rounded to 2 decimal places.
