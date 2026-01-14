@@ -55,3 +55,29 @@ SELECT
     ) AS immediate_percentage
 FROM first_orders
 WHERE rn = 1;
+
+Pandas query:
+import pandas as pd
+
+def immediate_food_delivery(delivery: pd.DataFrame) -> pd.DataFrame:
+    df = delivery
+    # Шаг 1. Преобразуем даты
+    df['order_date'] = pd.to_datetime(df['order_date'])
+    df['customer_pref_delivery_date'] = pd.to_datetime(df['customer_pref_delivery_date'])
+
+    # Шаг 2. Находим первые заказы
+    first_order_indices = df.groupby('customer_id')['order_date'].idxmin()
+    first_orders = df.loc[first_order_indices]
+
+    # Шаг 3. Отмечаем немедленные
+    first_orders['is_immediate'] = (
+        first_orders['order_date'] == first_orders['customer_pref_delivery_date']
+    )
+
+    # Шаг 4. Считаем процент
+    immediate_percentage = (first_orders['is_immediate'].mean() * 100).round(2)
+    # Шаг 5. Создаём DataFrame с результатом (требуемый формат вывода)
+    result_table = pd.DataFrame({
+        'immediate_percentage': [immediate_percentage]
+    })
+    return result_table
