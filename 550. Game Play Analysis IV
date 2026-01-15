@@ -8,18 +8,14 @@ Table: Activity
 | event_date   | date    |
 | games_played | int     |
 +--------------+---------+
-(player_id, event_date) is the primary key (combination of columns with unique values) of this table.
-This table shows the activity of players of some games.
-Each row is a record of a player who logged in and played a number of games (possibly 0) before logging out on someday using some device.
-
-Write a solution to report the fraction of players that logged in again on the day after the day they first logged in, rounded to 2 decimal places. In other words, you need to determine the number of players who logged in on the day immediately following their initial login, and divide it by the number of total players.
-
-The result format is in the following example.
-
- 
+(player_id, event_date) — это первичный ключ (комбинация столбцов с уникальными значениями) этой таблицы.
+В этой таблице отображается активность игроков в некоторых играх.
+Каждая строка — это запись об игроке, который вошел в систему и сыграл определенное количество игр (возможно, 0), прежде чем выйти из системы в какой-либо день, используя какое-либо устройство.
+Напишите решение, которое выведет долю игроков, которые снова вошли в систему на следующий день после первого входа, округленную до 2 знаков после запятой. 
+Другими словами, вам нужно определить количество игроков, которые вошли в систему на следующий день после первого входа, и разделить его на общее количество игроков.
+Формат результата приведен в следующем примере.
 
 Example 1:
-
 Input: 
 Activity table:
 +-----------+-----------+------------+--------------+
@@ -37,5 +33,5 @@ Output:
 +-----------+
 | 0.33      |
 +-----------+
-Explanation: 
-Only the player with id 1 logged back in after the first day he had logged in so the answer is 1/3 = 0.33
+Пояснение:
+Только игрок с ID 1 снова вошел в систему после первого дня своего входа, поэтому ответ 1/3 = 0,33
