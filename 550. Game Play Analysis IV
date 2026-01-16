@@ -39,19 +39,27 @@ Output:
 MySQL query:
 
 SELECT
+    -- 1. Округляем итоговую долю до 2 знаков после запятой
     ROUND(
+        -- 2. Считаем количество уникальных игроков, которые вошли на следующий день после первого входа
         COUNT(DISTINCT CASE
             WHEN DATEDIFF(a.event_date, first_login.first_date) = 1
             THEN a.player_id
-        END) * 1.0 /
+            -- Если условие НЕ выполнено, CASE вернёт NULL (не повлияет на COUNT)
+        END) * 1.0  -- Умножаем на 1.0, чтобы превратить целое в дробное (иначе деление будет целочисленным)
+        /
+        -- 3. Считаем общее количество уникальных игроков
         COUNT(DISTINCT a.player_id),
-        2
+        2  -- Количество знаков после запятой для ROUND
     ) AS fraction
 FROM Activity a
+-- 4. Подзапрос: находим первую дату входа для каждого игрока
 JOIN (
     SELECT
         player_id,
-        MIN(event_date) AS first_date
+        MIN(event_date) AS first_date  -- Самая ранняя дата входа для игрока
     FROM Activity
-    GROUP BY player_id
-) first_login ON a.player_id = first_login.player_id;
+    GROUP BY player_id  -- Группируем по игроку, чтобы взять MIN для каждого
+) first_login
+    ON a.player_id = first_login.player_id  -- Соединяем основную таблицу с подзапросом по player_id
+;
