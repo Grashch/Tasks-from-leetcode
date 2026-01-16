@@ -35,7 +35,8 @@ Output:
 | 2019-01  | DE      | 1           | 1              | 2000               | 2000                  |
 +----------+---------+-------------+----------------+--------------------+-----------------------+
 
-Write your PostgreSQL query statement below
+PostgreSQL query:
+
 with form_trans as (
     select
         to_char(trans_date, 'YYYY-MM') as month,
@@ -54,6 +55,8 @@ select
     sum(case when state = 'approved' then amount else 0 end) as approved_total_amount
 from form_trans
 group by month, country
+
+Pandas query:
 
 import pandas as pd
 
