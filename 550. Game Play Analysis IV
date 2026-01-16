@@ -63,3 +63,20 @@ JOIN (
 ) first_login
     ON a.player_id = first_login.player_id  -- Соединяем основную таблицу с подзапросом по player_id
 ;
+
+Pandas:
+
+import pandas as pd
+
+def gameplay_analysis(activity: pd.DataFrame) -> pd.DataFrame:
+    df = activity
+    df['event_date'] = pd.to_datetime(df['event_date'])
+    first_login = df.groupby('player_id')['event_date'].min().reset_index()
+    first_login.rename(columns={'event_date': 'first_date'}, inplace=True)
+    df = df.merge(first_login, on='player_id', how='left')
+    df['days_diff'] = (df['event_date'] - df['first_date']).dt.days
+    next_day_players = df[df['days_diff'] == 1]['player_id'].unique()
+    total_players = df['player_id'].nunique()
+    fraction = round(len(next_day_players) / total_players, 2)
+    result = pd.DataFrame({'fraction': [fraction]})
+    return result
