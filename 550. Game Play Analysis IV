@@ -70,13 +70,33 @@ import pandas as pd
 
 def gameplay_analysis(activity: pd.DataFrame) -> pd.DataFrame:
     df = activity
+
+    # 2. Преобразуем event_date в datetime
     df['event_date'] = pd.to_datetime(df['event_date'])
+
+    # 3. Находим первую дату входа для каждого игрока
     first_login = df.groupby('player_id')['event_date'].min().reset_index()
     first_login.rename(columns={'event_date': 'first_date'}, inplace=True)
+
+    # 4. Присоединяем первую дату к исходному DataFrame
     df = df.merge(first_login, on='player_id', how='left')
+
+    # Теперь в df есть столбец 'first_date' — первая дата входа для каждого игрока
+
+    # 5. Добавляем столбец с разницей в днях между текущей датой и первой датой
     df['days_diff'] = (df['event_date'] - df['first_date']).dt.days
+
+    # 6. Находим игроков, которые вошли на следующий день (разница = 1)
     next_day_players = df[df['days_diff'] == 1]['player_id'].unique()
+
+    # unique() — чтобы не считать одного игрока несколько раз, если он входил несколько дней подряд
+
+    # 7. Считаем общее число уникальных игроков
     total_players = df['player_id'].nunique()
+
+    # 8. Вычисляем долю и округляем до 2 знаков
     fraction = round(len(next_day_players) / total_players, 2)
+
+    # 9. Выводим результат в виде DataFrame (как в примере)
     result = pd.DataFrame({'fraction': [fraction]})
     return result
