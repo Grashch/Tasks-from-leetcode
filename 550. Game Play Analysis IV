@@ -35,3 +35,23 @@ Output:
 +-----------+
 Пояснение:
 Только игрок с ID 1 снова вошел в систему после первого дня своего входа, поэтому ответ 1/3 = 0,33
+
+MySQL query:
+
+SELECT
+    ROUND(
+        COUNT(DISTINCT CASE
+            WHEN DATEDIFF(a.event_date, first_login.first_date) = 1
+            THEN a.player_id
+        END) * 1.0 /
+        COUNT(DISTINCT a.player_id),
+        2
+    ) AS fraction
+FROM Activity a
+JOIN (
+    SELECT
+        player_id,
+        MIN(event_date) AS first_date
+    FROM Activity
+    GROUP BY player_id
+) first_login ON a.player_id = first_login.player_id;
