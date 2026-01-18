@@ -76,9 +76,25 @@ Pandas query:
 import pandas as pd
 
 def count_unique_subjects(teacher: pd.DataFrame) -> pd.DataFrame:
-    result = (teacher
-          .groupby('teacher_id')['subject_id']
-          .nunique()
-          .reset_index()
-          .rename(columns={'subject_id': 'cnt'}))
-    return result
+
+# Основное решение — пошагово
+    result = (
+        teacher
+        # a. Группируем по `teacher_id` — все строки с одним `teacher_id` в одну группу
+        .groupby('teacher_id')
+        
+        # b. Выбираем столбец `subject_id` внутри каждой группы — именно его уникальные значения нас интересуют
+        ['subject_id']
+        
+        # c. Считаем количество уникальных значений `subject_id` в каждой группе
+        #    `.nunique()` — специальный метод Pandas для подсчёта уникальных элементов
+        .nunique()
+        
+        # d. Превращаем результат (где `teacher_id` — индекс) в обычный DataFrame с колонками
+        .reset_index()
+        
+        # e. Переименовываем столбец `subject_id` (который теперь содержит счётчики) в `cnt`
+        #    как требуется в примере вывода
+        .rename(columns={'subject_id': 'cnt'})
+    )
+        return result
