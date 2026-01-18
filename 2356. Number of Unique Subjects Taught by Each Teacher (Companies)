@@ -47,12 +47,29 @@ Output:
 
 MySQL query:
 
+
 SELECT
+    -- 1. Выбираем столбец `teacher_id` — он будет ключом группировки и выйдет в результате
     teacher_id,
+    
+    -- 2. Считаем количество *уникальных* `subject_id` для каждого `teacher_id`
+    --    `DISTINCT` гарантирует, что один и тот же предмет не засчитывается дважды,
+    --    даже если преподаватель ведёт его в нескольких отделах
     COUNT(DISTINCT subject_id) AS cnt
-FROM Teacher
-GROUP BY teacher_id
-ORDER BY teacher_id;
+    
+FROM
+    -- 3. Указываем исходную таблицу `Teacher`
+    Teacher
+    
+GROUP BY
+    -- 4. Группируем все строки по `teacher_id`:
+    --    все записи с одинаковым `teacher_id` объединяются в одну группу
+    teacher_id
+    
+ORDER BY
+    -- 5. Сортируем результат по `teacher_id` для наглядности
+    --    (не обязательно по условию, но удобно для проверки)
+    teacher_id;
 
 Pandas query:
 
