@@ -59,3 +59,38 @@ where
     datediff('2019-07-27', activity_date) < 30
     
 GROUP BY activity_date
+
+Pandas query:
+
+import pandas as pd
+
+def user_activity(activity: pd.DataFrame) -> pd.DataFrame:
+    # 1. Преобразуем столбец activity_date в тип datetime (если ещё не преобразован)
+    activity['activity_date'] = pd.to_datetime(activity['activity_date'])
+    
+    # 2. Определяем конечную дату и вычисляем начальную дату периода (30 дней назад)
+    end_date = pd.Timestamp('2019-07-27')
+    start_date = end_date - pd.Timedelta(days=29)  # 30 дней включительно: от 2019-06-28 до 2019-07-27
+    
+    # 3. Фильтруем строки: оставляем только те, где activity_date попадает в нужный 30‑дневный период
+    filtered_activity = activity[
+        (activity['activity_date'] >= start_date) &
+        (activity['activity_date'] <= end_date)
+    ]
+    
+    # 4. Группируем по activity_date и считаем количество уникальных user_id в каждый день
+    result = (
+        filtered_activity
+        .groupby('activity_date')
+        ['user_id']
+        .nunique()
+        .reset_index()
+    )
+    
+    # 5. Переименовываем столбцы в соответствии с требуемым форматом вывода
+    result.columns = ['day', 'active_users']
+    
+    # 6. Преобразуем столбец 'day' обратно в строку в формате YYYY-MM-DD (если нужно точно соответствовать примеру)
+    result['day'] = result['day'].dt.strftime('%Y-%m-%d')
+    
+    return result
