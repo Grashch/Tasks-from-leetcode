@@ -9,19 +9,15 @@ Table: Sales
 | quantity    | int   |
 | price       | int   |
 +-------------+-------+
-(sale_id, year) is the primary key (combination of columns with unique values) of this table.
-Each row records a sale of a product in a given year.
-A product may have multiple sales entries in the same year.
-Note that the per-unit price.
-
-Write a solution to find all sales that occurred in the first year each product was sold.
-
-For each product_id, identify the earliest year it appears in the Sales table.
-
-Return all sales entries for that product in that year.
-
-Return a table with the following columns: product_id, first_year, quantity, and price.
-Return the result in any order.
+(sale_id, year) — это первичный ключ (комбинация столбцов с уникальными значениями) этой таблицы.
+Каждая строка содержит запись о продаже товара в заданном году.
+У товара может быть несколько записей о продажах в одном и том же году.
+Обратите внимание, что цена за единицу.
+Напишите решение для поиска всех продаж, которые произошли в первый год продаж каждого товара.
+Для каждого product_id определите самый ранний год, когда он появляется в таблице продаж.
+Верните все записи о продажах этого товара в этом году.
+Верните таблицу со следующими столбцами: product_id, first_year, quantity и price.
+Верните результат в любом порядке.
 
  
 
