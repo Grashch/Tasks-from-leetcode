@@ -58,3 +58,13 @@ WHERE
   GROUP BY product_id
  );
  
+Pandas:
+import pandas as pd
+
+def sales_analysis(sales: pd.DataFrame) -> pd.DataFrame:
+    first_sales = sales.groupby('product_id')['year'].min().reset_index(name='first_year')
+    sales_res = sales.merge(first_sales, on='product_id')
+    sales_res = sales_res[sales_res['year'] == sales_res['first_year']]
+    sales_res = sales_res[['product_id', 'first_year', 'quantity', 'price']]
+    sales_res
+    return sales_res
