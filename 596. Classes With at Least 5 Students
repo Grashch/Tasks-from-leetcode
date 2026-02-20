@@ -6,18 +6,12 @@ Table: Courses
 | student     | varchar |
 | class       | varchar |
 +-------------+---------+
-(student, class) is the primary key (combination of columns with unique values) for this table.
-Each row of this table indicates the name of a student and the class in which they are enrolled.
+(student, class) — это первичный ключ (комбинация столбцов с уникальными значениями) для этой таблицы.
+Каждая строка этой таблицы указывает имя студента и класс, в котором он учится.
+Напишите решение для поиска всех классов, в которых есть не менее пяти студентов.
+Верните результирующую таблицу в любом порядке.
+Формат результата приведен в следующем примере.
  
-
-Write a solution to find all the classes that have at least five students.
-
-Return the result table in any order.
-
-The result format is in the following example.
-
- 
-
 Example 1:
 
 Input: 
@@ -41,8 +35,8 @@ Output:
 +---------+
 | Math    |
 +---------+
-Explanation: 
-- Math has 6 students, so we include it.
-- English has 1 student, so we do not include it.
-- Biology has 1 student, so we do not include it.
-- Computer has 1 student, so we do not include it.
+Пояснение:
+- На уроках математики 6 учеников, поэтому мы включаем этот предмет.
+- На уроках английского языка 1 ученик, поэтому мы его не включаем.
+- На уроках биологии 1 ученик, поэтому мы его не включаем.
+- На уроках информатики 1 ученик, поэтому мы его не включаем.
