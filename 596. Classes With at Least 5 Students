@@ -53,6 +53,7 @@ import pandas as pd
 def find_classes(courses: pd.DataFrame) -> pd.DataFrame:
     courses_gr = courses.groupby('class').size().reset_index(name='count')
     res = pd.DataFrame(courses_gr[courses_gr['count'] > 4]['class'])
+    # или res = courses_gr[courses_gr['count'] > 4][['class']] - тоже DataFrame
     return res
 
 
