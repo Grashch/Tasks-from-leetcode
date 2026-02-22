@@ -52,8 +52,7 @@ import pandas as pd
 
 data = [['A', 'Math'], ['B', 'English'], ['C', 'Math'], ['D', 'Biology'], ['E', 'Math'], ['F', 'Computer'], ['G', 'Math'], ['H', 'Math'], ['I', 'Math']]
 courses = pd.DataFrame(data, columns=['student', 'class']).astype({'student':'object', 'class':'object'})
-
-courses_gr = courses.groupby('class').count()
+courses_gr = courses.groupby('class').size().reset_index(name='count')
 
 Schema for SQL
 Create table If Not Exists Courses (student varchar(255), class varchar(255))
