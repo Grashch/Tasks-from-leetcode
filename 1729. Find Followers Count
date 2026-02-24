@@ -6,11 +6,11 @@ Table: Followers
 | user_id     | int  |
 | follower_id | int  |
 +-------------+------+
-(user_id, follower_id) is the primary key (combination of columns with unique values) for this table.
-This table contains the IDs of a user and a follower in a social media app where the follower follows the user.
-Write a solution that will, for each user, return the number of followers.
-Return the result table ordered by user_id in ascending order.
-The result format is in the following example.
+(user_id, follower_id) — это первичный ключ (комбинация столбцов с уникальными значениями) для этой таблицы.
+Эта таблица содержит идентификаторы пользователя и подписчика в приложении социальной сети, где подписчик подписан на пользователя.
+Напишите решение, которое для каждого пользователя вернет количество подписчиков.
+Верните результирующую таблицу, отсортированную по user_id в порядке возрастания.
+Формат результата показан в следующем примере.
 
 Example 1:
 Input: 
@@ -31,7 +31,7 @@ Output:
 | 1       | 1              |
 | 2       | 2              |
 +---------+----------------+
-Explanation: 
-The followers of 0 are {1}
-The followers of 1 are {0}
-The followers of 2 are {0,1}
+Пояснение:
+Последователи числа 0 — это {1}
+Последователи числа 1 — это {0}
+Последователи числа 2 — это {0,1}
