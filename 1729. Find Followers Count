@@ -42,6 +42,23 @@ FROM Followers
 GROUP BY user_id
 ORDER BY user_id
 
+Schema of SQL:
+Create table If Not Exists Followers(user_id int, follower_id int)
+Truncate table Followers
+insert into Followers (user_id, follower_id) values ('0', '1')
+insert into Followers (user_id, follower_id) values ('1', '0')
+insert into Followers (user_id, follower_id) values ('2', '0')
+insert into Followers (user_id, follower_id) values ('2', '1')
+
+
+Pandas query:
+import pandas as pd
+
+def count_followers(followers: pd.DataFrame) -> pd.DataFrame:
+    return followers.groupby('user_id', as_index=False)\
+    .count()\
+    .sort_values('user_id')\
+    .rename(columns={'follower_id':'followers_count'})
 
 Schema of pandas:
 data = [['0', '1'], ['1', '0'], ['2', '0'], ['2', '1']]
