@@ -5,20 +5,13 @@ Table: MyNumbers
 +-------------+------+
 | num         | int  |
 +-------------+------+
-This table may contain duplicates (In other words, there is no primary key for this table in SQL).
-Each row of this table contains an integer.
- 
-
-A single number is a number that appeared only once in the MyNumbers table.
-
-Find the largest single number. If there is no single number, report null.
-
-The result format is in the following example.
-
- 
+В этой таблице могут содержаться дубликаты (другими словами, в SQL для этой таблицы нет первичного ключа).
+Каждая строка этой таблицы содержит целое число.
+Единичное число — это число, которое встречалось в таблице MyNumbers только один раз.
+Найдите наибольшее единичное число. Если единичного числа нет, сообщите о значении NULL.
+Формат результата приведен в следующем примере.
 
 Example 1:
-
 Input: 
 MyNumbers table:
 +-----+
@@ -39,10 +32,9 @@ Output:
 +-----+
 | 6   |
 +-----+
-Explanation: The single numbers are 1, 4, 5, and 6.
-Since 6 is the largest single number, we return it.
+Пояснение: Речь идёт об отдельных числах 1, 4, 5 и 6.
+Поскольку 6 — наибольшее отдельное число, мы возвращаем его.
 Example 2:
-
 Input: 
 MyNumbers table:
 +-----+
@@ -62,4 +54,4 @@ Output:
 +------+
 | null |
 +------+
-Explanation: There are no single numbers in the input table so we return null.
+Пояснение: В таблице входных данных нет отдельных чисел, поэтому мы возвращаем null.
