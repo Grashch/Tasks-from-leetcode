@@ -56,6 +56,14 @@ Output:
 +------+
 Пояснение: В таблице входных данных нет отдельных чисел, поэтому мы возвращаем null.
 
+Query for PostgreSQL:
+select max(num) as num
+from
+(select num
+from MyNumbers
+group by num
+having count(num) = 1) as q
+
 Schema for SQL:
 Create table If Not Exists MyNumbers (num int)
 Truncate table MyNumbers
