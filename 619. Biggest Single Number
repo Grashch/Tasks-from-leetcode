@@ -79,7 +79,13 @@ insert into MyNumbers (num) values ('6')
 import pandas as pd
 
 def biggest_single_number(my_numbers: pd.DataFrame) -> pd.DataFrame:
-  num_group = my_numbers.groupby('num')['num'].count().reset_index(name='count')
+    num_group = my_numbers.groupby('num')['num'].count().reset_index(name='count')
+    num_count_1 = num_group[num_group['count'] == 1]
+    if num_count_1.empty:
+        return pd.DataFrame({'num': [None]})
+        
+    max_num = num_count_1['num'].max()
+    return pd.DataFrame({'num': [max_num]})
 
 Schema for Pandas:
 data = [[8], [8], [3], [3], [1], [4], [5], [6]]
