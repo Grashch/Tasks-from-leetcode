@@ -6,31 +6,22 @@ Table: Customer
 | customer_id | int     |
 | product_key | int     |
 +-------------+---------+
-This table may contain duplicates rows. 
-customer_id is not NULL.
-product_key is a foreign key (reference column) to Product table.
- 
+В этой таблице могут содержаться повторяющиеся строки.
+customer_id не равен NULL.
+product_key является внешним ключом (столбцом-ссылкой) на таблицу Product.
 
 Table: Product
-
 +-------------+---------+
 | Column Name | Type    |
 +-------------+---------+
 | product_key | int     |
 +-------------+---------+
-product_key is the primary key (column with unique values) for this table.
- 
-
-Write a solution to report the customer ids from the Customer table that bought all the products in the Product table.
-
-Return the result table in any order.
-
-The result format is in the following example.
-
- 
+product_key — это первичный ключ (столбец с уникальными значениями) для этой таблицы.
+Напишите решение для вывода идентификаторов клиентов из таблицы Customer, которые купили все товары из таблицы Product.
+Верните результирующую таблицу в любом порядке.
+Формат результата приведен в следующем примере.
 
 Example 1:
-
 Input: 
 Customer table:
 +-------------+-------------+
@@ -56,8 +47,8 @@ Output:
 | 1           |
 | 3           |
 +-------------+
-Explanation: 
-The customers who bought all the products (5 and 6) are customers with IDs 1 and 3.
+Пояснение:
+Покупатели, которые приобрели все товары (5 и 6), — это покупатели с идентификаторами 1 и 3.
 
 Schema for SQL:
 Create table If Not Exists Customer (customer_id int, product_key int)
