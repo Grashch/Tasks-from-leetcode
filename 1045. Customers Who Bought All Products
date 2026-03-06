@@ -69,6 +69,15 @@ Truncate table Product
 insert into Product (product_key) values ('5')
 insert into Product (product_key) values ('6')
 
+Pandas query:
+
+import pandas as pd
+
+def find_customers(customer: pd.DataFrame, product: pd.DataFrame) -> pd.DataFrame:
+    return customer.groupby('customer_id')\
+    .filter(lambda x: x['product_key'].nunique() == product['product_key'].nunique())\
+    [['customer_id']].drop_duplicates()
+
 Schema for pandas:
 data = [[1, 5], [2, 6], [3, 5], [3, 6], [1, 6]]
 customer = pd.DataFrame(data, columns=['customer_id', 'product_key']).astype({'customer_id':'Int64', 'product_key':'Int64'})
