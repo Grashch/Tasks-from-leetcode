@@ -50,6 +50,12 @@ Output:
 Пояснение:
 Покупатели, которые приобрели все товары (5 и 6), — это покупатели с идентификаторами 1 и 3.
 
+PostgreSQL query:
+select customer_id
+from Customer
+group by customer_id
+having count(distinct product_key) = (select count(distinct product_key) from Product)
+
 Schema for SQL:
 Create table If Not Exists Customer (customer_id int, product_key int)
 Create table Product (product_key int)
