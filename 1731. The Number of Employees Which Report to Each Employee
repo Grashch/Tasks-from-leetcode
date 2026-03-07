@@ -7,12 +7,12 @@ Table: Employees
 | reports_to  | int      |
 | age         | int      |
 +-------------+----------+
-employee_id is the column with unique values for this table.
-This table contains information about the employees and the id of the manager they report to. Some employees do not report to anyone (reports_to is null). 
-For this problem, we will consider a manager an employee who has at least 1 other employee reporting to them.
-Write a solution to report the ids and the names of all managers, the number of employees who report directly to them, and the average age of the reports rounded to the nearest integer.
-Return the result table ordered by employee_id.
-The result format is in the following example.
+В этой таблице столбец employee_id содержит уникальные значения.
+Таблица содержит информацию о сотрудниках и идентификаторе руководителя, которому они подчиняются. Некоторые сотрудники никому не подчиняются (reports_to имеет значение null).
+В данной задаче мы будем считать руководителем сотрудника, у которого есть как минимум один подчиненный.
+Напишите решение, которое выведет идентификаторы и имена всех руководителей, количество сотрудников, которые им подчиняются напрямую, и средний возраст подчиненных, округленный до ближайшего целого числа.
+Верните результирующую таблицу, отсортированную по employee_id.
+Формат результата приведен в следующем примере..
 
 Example 1:
 
@@ -32,7 +32,10 @@ Output:
 +-------------+-------+---------------+-------------+
 | 9           | Hercy | 2             | 39          |
 +-------------+-------+---------------+-------------+
-Explanation: Hercy has 2 people report directly to him, Alice and Bob. Their average age is (41+36)/2 = 38.5, which is 39 after rounding it to the nearest integer.
+Пояснение: У Герси есть два подчиненных, Алиса и Боб. 
+Их средний возраст составляет (41+36)/2 = 38,5, что 
+после округления до ближайшего целого числа равно 39.
+
 Example 2:
 
 Input: 
