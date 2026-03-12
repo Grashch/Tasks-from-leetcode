@@ -6,15 +6,17 @@ Table: Employee
 | department_id | int     |
 | primary_flag  | varchar |
 +---------------+---------+
-(employee_id, department_id) is the primary key (combination of columns with unique values) for this table.
-employee_id is the id of the employee.
-department_id is the id of the department to which the employee belongs.
-primary_flag is an ENUM (category) of type ('Y', 'N'). If the flag is 'Y', the department is the primary department for the employee. If the flag is 'N', the department is not the primary.
+(employee_id, department_id) — это первичный ключ (комбинация столбцов с уникальными значениями) для этой таблицы.
+employee_id — это идентификатор сотрудника.
+department_id — это идентификатор отдела, к которому принадлежит сотрудник.
+primary_flag — это перечисление (категория) типа ('Y', 'N'). Если флаг равен 'Y', отдел является основным отделом для сотрудника.
+Если флаг равен 'N', отдел не является основным.
 
-Employees can belong to multiple departments. When the employee joins other departments, they need to decide which department is their primary department. Note that when an employee belongs to only one department, their primary column is 'N'.
-Write a solution to report all the employees with their primary department. For employees who belong to one department, report their only department.
-Return the result table in any order.
-The result format is in the following example.
+Сотрудники могут принадлежать к нескольким отделам. При переходе в другой отдел сотрудник должен определить, какой отдел является для него основным.
+Обратите внимание, что если сотрудник принадлежит только к одному отделу, столбец «основной отдел» будет иметь значение «N».
+Напишите решение для вывода информации обо всех сотрудниках с указанием их основного отдела. Для сотрудников, принадлежащих только к одному отделу, выведите информацию только об этом отделе.
+Верните результирующую таблицу в любом порядке.
+Формат результата приведен в следующем примере.
 
 Example 1:
 Input: 
@@ -39,8 +41,8 @@ Output:
 | 3           | 3             |
 | 4           | 3             |
 +-------------+---------------+
-Explanation: 
-- The Primary department for employee 1 is 1.
-- The Primary department for employee 2 is 1.
-- The Primary department for employee 3 is 3.
-- The Primary department for employee 4 is 3.
+Пояснение:
+- Основной отдел для сотрудника 1 — 1.
+- Основной отдел для сотрудника 2 — 1.
+- Основной отдел для сотрудника 3 — 3.
+- Основной отдел для сотрудника 4 — 3.
