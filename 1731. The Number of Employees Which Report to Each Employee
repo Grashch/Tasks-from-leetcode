@@ -86,3 +86,31 @@ select
 from employees1 e join employees1 e2 
 on e.employee_id = e2.reports_to -- Условие: ID менеджера совпадает с полем reports_to у сотрудника
 group by e.employee_id, e.name -- Группируем результаты по каждому конкретному менеджеру
+
+
+Pandas query:
+import pandas as pd
+
+data = [[9, 'Hercy', None, 43], [6, 'Alice', 9, 41], [4, 'Bob', 9, 36], [2, 'Winston', None, 37]]
+employees = pd.DataFrame(data, columns=['employee_id', 'name', 'reports_to', 'age']).astype
+		(
+        {'employee_id':'Int64', 'name':'object', 'reports_to':'Int64', 'age':'Int64'}
+        )
+
+def count_employees(employees: pd.DataFrame) -> pd.DataFrame:
+    # Группируем по начальникам и считаем число подчиненных и средний возраст
+    temp = employees.groupby('reports_to').agg(
+        reports_count = ('employee_id', 'count'),
+        average_age = ('age', 'mean') 
+    ).reset_index()
+
+    # Применяем математическое округление (0.5 вверх) и приводим к целому числу
+    temp['average_age'] = (temp['average_age'] + 0.5).astype(int)
+    
+    # Подтягиваем имена начальников по их ID из исходной таблицы
+    result = temp.merge(employees[['employee_id', 'name']],
+                        left_on='reports_to',
+                        right_on='employee_id')
+    
+    # Возвращаем итоговый набор колонок в нужном порядке
+    return result[['employee_id', 'name', 'reports_count', 'average_age']]
