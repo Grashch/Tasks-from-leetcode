@@ -39,7 +39,6 @@ Output:
 после округления до ближайшего целого числа равно 39.
 
 Example 2:
-
 Input: 
 Employees table:
 +-------------+---------+------------+-----+ 
@@ -62,3 +61,28 @@ Output:
 | 2           | Alice   | 2             | 37          |
 | 3           | Bob     | 1             | 37          |
 +-------------+---------+---------------+-------------+
+
+SQL query:
+-- Создаем таблицу сотрудников, если она еще не существует
+Create table If Not Exists Employees1(
+	employee_id int, 
+	name varchar(20), 
+	reports_to int, age int)
+
+-- Заполняем таблицу данными: ID, имя, ID начальника и возраст
+insert into Employees1 (employee_id, name, reports_to, age) values 
+('9', 'Hercy', NULL, '43'),
+('6', 'Alice', '9', '41'),
+('4', 'Bob', '9', '36'),
+('2', 'Winston', NULL, '37')
+
+-- Выбираем данные начальника и считаем метрики для его подчиненных
+select 
+	e.employee_id, -- ID менеджера
+	e.name, -- Имя менеджера
+	count(e2.employee_id) as reports_count, -- Подсчитываем количество прямых подчиненных
+	AVG(round(e2.age ,1)) -- Вычисляем средний возраст подчиненных с округлением
+-- Соединяем таблицу саму с собой: слева менеджер (e), справа — его подчиненные (e2)
+from employees1 e join employees1 e2 
+on e.employee_id = e2.reports_to -- Условие: ID менеджера совпадает с полем reports_to у сотрудника
+group by e.employee_id, e.name -- Группируем результаты по каждому конкретному менеджеру
